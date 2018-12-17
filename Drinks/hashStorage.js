@@ -3,7 +3,7 @@
 class HashStorage {
 
     addValue(key, value) {
-        this[key] = {value};
+        this[key] = value;
     }
 
     getValue(key) {
@@ -15,27 +15,30 @@ class HashStorage {
     }
 
     getKeys() {
-        let arrayDrinks = [],
-            i = 0;
+        let arrayKeys = [];
+        // i = 0;
 
-        for (let key in this) {
-            arrayDrinks[i] = key;
-            i++;
-        }
+        arrayKeys = Object.keys(this);
+        // for (let key in this) {
+        //     arrayKeys[i] = key;
+        //     i++;
+        // }
 
-        return arrayDrinks;
+        return arrayKeys;
     }
 }
 
 let drinkStorage = new HashStorage();
 
 function addDrink() {
-    let nameDrink = prompt('Название напитка'),
-        isAlcoholic = confirm('Алкогольный он или нет'),
-        recipeDrink = prompt('Рецепт его приготовления');
+    let nameDrink = prompt('Название напитка: '),
+        isAlcoholic = confirm('Алкогольный он или нет?'),
+        recipeDrink = prompt('Рецепт его приготовления: ');
 
-    drinkStorage.addValue(nameDrink, recipeDrink);
-    drinkStorage.addValue('alcoholic', isAlcoholic);
+    drinkStorage.addValue(nameDrink, {
+        'alcoholic': isAlcoholic,
+        'recipe': recipeDrink,
+    });
 }
 
 function getDrink() {
@@ -45,9 +48,11 @@ function getDrink() {
 }
 
 function removeDrink() {
+    let nameDrink = prompt('Название напитка');
 
+    drinkStorage.deleteValue(nameDrink);
 }
 
 function getListDrink() {
-
+    console.log(drinkStorage.getKeys());
 }
