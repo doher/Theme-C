@@ -3,7 +3,7 @@
 class HashStorage {
 
     addValue(key, value) {
-        this[key] = {value};
+        this[key] = value;
     }
 
     getValue(key) {
