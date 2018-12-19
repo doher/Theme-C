@@ -16,13 +16,7 @@ class HashStorage {
 
     getKeys() {
         let arrayKeys = [];
-        // i = 0;
-
         arrayKeys = Object.keys(this);
-        // for (let key in this) {
-        //     arrayKeys[i] = key;
-        //     i++;
-        // }
 
         return arrayKeys;
     }
@@ -32,27 +26,29 @@ let drinkStorage = new HashStorage();
 
 function addDrink() {
     let nameDrink = prompt('Название напитка: '),
-        isAlcoholic = confirm('Алкогольный он или нет?'),
+        isAlcoholic = confirm('Алкогольный он или нет?') ? 'Да' : 'Нет',
         recipeDrink = prompt('Рецепт его приготовления: ');
 
     drinkStorage.addValue(nameDrink, {
+        'name': nameDrink,
         'alcoholic': isAlcoholic,
         'recipe': recipeDrink,
     });
 }
 
 function getDrink() {
-    let nameDrink = prompt('Название напитка');
+    let nameDrink = prompt('Название напитка: '),
+        msg = drinkStorage.getValue(nameDrink) ? 'Напиток ' + drinkStorage[nameDrink].name + '\n' + 'Алкогольный: ' + drinkStorage[nameDrink].alcoholic + '\n' + 'Рецепт приготовления: ' + drinkStorage[nameDrink].recipe : 'Такой Напиток отсутствует.';
 
-    console.log(drinkStorage.getValue(nameDrink));
+    console.log(msg);
 }
 
 function removeDrink() {
-    let nameDrink = prompt('Название напитка');
+    let nameDrink = prompt('Название напитка: ');
 
     drinkStorage.deleteValue(nameDrink);
 }
 
 function getListDrink() {
-    console.log(drinkStorage.getKeys());
+    console.log('Перечень всех напитков: ' + drinkStorage.getKeys());
 }
