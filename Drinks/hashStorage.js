@@ -15,10 +15,7 @@ class HashStorage {
     }
 
     getKeys() {
-        let arrayKeys = [];
-        arrayKeys = Object.keys(this);
-
-        return arrayKeys;
+        return Object.keys(this);
     }
 }
 
