@@ -5,10 +5,15 @@ function randomDiap(n, m) {
 }
 
 function mood(colorsCount) {
+
     let colors = ['красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый'],
         minValue = 0,
         maxValue = 6,
         colorsHash = {};
+
+    if (colorsCount > colors.length) {
+        return console.log('В радуге только семь цветов!');
+    }
 
     console.log('цветов: ' + colorsCount);
 
@@ -29,4 +34,4 @@ function mood(colorsCount) {
     }
 }
 
-mood(5);
+mood(66);
