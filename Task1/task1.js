@@ -1,6 +1,6 @@
 'use strict';
 
-function trasformArray(array) {
+function transformArray(array) {
     let zeroArray = [],
         restArray = [],
         lengthArray = array.length;
@@ -19,4 +19,4 @@ function trasformArray(array) {
 
 let array = [1, 3, false, 0, 'hjh', 2, 1, 0, 1, 23, 5, 0, 0, '13', true];
 
-console.log(trasformArray(array));
+console.log(transformArray(array));
