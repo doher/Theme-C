@@ -19,6 +19,19 @@ function getArray(array, number) {
     return console.log('Нет такого подмножества!');
 }
 
+
+var array = [1, 3, 4, 5, 6],
+	row  = Math.pow(2, array.length),
+	multidimensionalArray = [];
+
+for (var i = row; i < 2 * row; ++i) {
+	var tempArray = (i).toString(2).split('').splice(1, (i).toString(2).length);
+	
+	multidimensionalArray[i - row] = tempArray;
+}
+
+
+
 let arr = [1, 2, 4, 5, 6, 1, 2, 3, 5, 6, 7, 0, 2, 3];
 
 getArray(arr, 34);
