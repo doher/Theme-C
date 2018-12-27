@@ -1,37 +1,58 @@
-function getArray(array, number) {
-    let arrayNumber = [];
+function getMask(array) {
+    let lengthArray = array.length,
+        row = Math.pow(2, lengthArray),
+        maskArray = [];
 
-    for (let i = 0; i < array.length; ++i) {
-        arrayNumber.push(array[i]);
+    for (let i = row; i < 2 * row; ++i) {
+        let tempArray = (i).toString(2).split('').splice(1, lengthArray);
 
-        let sum = arrayNumber.reduce((a, b) => a + b, 0);
-
-        if (sum === number) {
-            return console.log(arrayNumber);
-        }
+        maskArray[i - row] = tempArray;
     }
 
-    if (array.length) {
-        array.shift();
-        return getArray(array, number);
+    let lengthMaskArray = maskArray.length;
+
+    for (let i = 0; i < lengthMaskArray; ++i) {
+        let tempArray = [];
+
+        for (let j = 0; j < lengthArray; ++j) {
+
+            tempArray[j] = (+maskArray[i][j] === 0) ? 0 : array[j];
+        }
+
+        maskArray[i] = tempArray;
+    }
+
+    return maskArray;
+}
+
+function getSubset(array, number) {
+
+    let maskArray = getMask(array),
+        lengthMaskArray = maskArray.length;
+
+    for (let i = 1; i < lengthMaskArray; ++i) {
+        let sum = maskArray[i].reduce((a, b) => a + b, 0);
+
+        if (sum === number) {
+            let subset = [],
+                k = 0;
+
+            for (let j = 0; j < maskArray[i].length; ++j) {
+                if (maskArray[i][j] !== 0) {
+                    subset[k] = maskArray[i][j];
+                    ++k;
+                }
+            }
+
+            return subset;
+        }
     }
 
     return console.log('Нет такого подмножества!');
 }
 
+let array = [1, 2, 4, 5, 6, 1, 2, 3, 5, 6, 7, 0, 2, 3],
+    subset = getSubset(array, 45);
 
-var array = [1, 3, 4, 5, 6],
-	row  = Math.pow(2, array.length),
-	multidimensionalArray = [];
-
-for (var i = row; i < 2 * row; ++i) {
-	var tempArray = (i).toString(2).split('').splice(1, (i).toString(2).length);
-	
-	multidimensionalArray[i - row] = tempArray;
-}
-
-
-
-let arr = [1, 2, 4, 5, 6, 1, 2, 3, 5, 6, 7, 0, 2, 3];
-
-getArray(arr, 34);
+console.log(subset);
+console.log(subset.reduce((a, b) => a + b, 0));
